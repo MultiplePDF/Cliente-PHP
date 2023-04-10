@@ -54,8 +54,8 @@
                         
                         <div class="row d-flex justify-content-center">
                             <div class="col-md-6 col-xl-4" style="width: 450px;height: 500pxpx;">
-                                <form class="text-center d-flex flex-column justify-content-between" method="post">
-
+                                <form class="text-center d-flex flex-column justify-content-between" method="POST" action="{{ route('SubirArchivos') }}">
+                                    @csrf
                                     <div class="mb-3">
                                         <label class="form-label" style="font-family: 'Montserrat', sans-serif;
                                         font-weight: 600; /* semibold */;margin-right: 340px;margin-left: 10px;width: 170px;text-align: left;">Correo electrónico</label>
@@ -103,6 +103,7 @@
             </div>
         </div>
     </div>
+    
     <footer class="text-center py-4"></footer>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 </body>

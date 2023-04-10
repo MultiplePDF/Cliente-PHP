@@ -2,13 +2,19 @@
 
 namespace App\Models;
 
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+//use Illuminate\Foundation\Auth\User as Authenticatable;
+use Jenssegers\Mongodb\Auth\User as Authenticatable;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+//class User extends Authenticatable
+class User extends Eloquent implements \Illuminate\Contracts\Auth\Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -18,7 +24,6 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
         'email',
         'password',
     ];
