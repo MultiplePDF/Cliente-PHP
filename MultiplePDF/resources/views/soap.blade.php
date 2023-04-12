@@ -12,9 +12,11 @@
     <form method="POST" action="{{ route('soap') }}">
         @csrf
         <label for="intA">intA:</label>
-        <input type="number" name="intA" id="intA"><br>
+        <input type="text" name="intA" id="intA"><br>
         <label for="intB">intB:</label>
-        <input type="number" name="intB" id="intB"><br>
+        <input type="text" name="intB" id="intB"><br>
+        <label for="intB">intC:</label>
+        <input type="text" name="intC" id="intB"><br>
         <button type="submit">Add</button>
     </form>
 </body>

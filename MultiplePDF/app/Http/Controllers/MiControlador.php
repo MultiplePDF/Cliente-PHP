@@ -12,7 +12,14 @@ class MiControlador extends Controller
         $contenidoArchivo = file_get_contents($rutaArchivo);
         $contenidoBase64 = base64_encode($contenidoArchivo);
         $extension = pathinfo($rutaArchivo, PATHINFO_BASENAME);
-        $json = json_encode(['name:'=>$extension,'base64' => $contenidoBase64]);
+
+        $pesoArchivo = filesize($rutaArchivo); // obtener peso del archivo en bytes
+        $json = json_encode([
+            
+        'name' => $extension,
+        'size' => $pesoArchivo,
+        'base64' => $contenidoBase64
+        ]);
         return response($json)->header('Content-Type', 'application/json');
     }
 }

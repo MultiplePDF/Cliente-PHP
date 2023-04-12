@@ -63,4 +63,5 @@ Route::get('/SubirArchivos', function () {
 Route::get('/soap1', 'App\Http\Controllers\SoapController@testSoap')->name('soap');
 Route::post('/soap1', 'App\Http\Controllers\SoapController@testSoap');
 
-
+Route::get('/cargar-archivo', 'App\Http\Controllers\ArchivoController@mostrarFormularioCarga');
+Route::post('/cargar-archivo', 'App\Http\Controllers\ArchivoController@cargarArchivo');

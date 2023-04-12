@@ -9,13 +9,16 @@ class SoapController extends Controller
 {
     public function testSoap(Request $request)
     {
-        if ($request->isMethod('post')) {
-            $url = 'http://www.dneonline.com/calculator.asmx?WSDL';
+        if ($request->filled('intA', 'intB', 'intC')) {
+            $url = 'http://java.bucaramanga.upb.edu.co/ws/multiplepdf.wsdl';
             $client = new \SoapClient($url);
-            $result = $client->Add(['intA' => $request->input('intA'), 'intB' => $request->input('intB')])->AddResult;
+            $result = $client->register([
+                'name' => $request->input('intA'),
+                'email' => $request->input('intB'),
+                'password' => $request->input('intC')
+            ]);
             $result = json_encode($result);
             return view('soap', compact('result'));
-
         } else {
             return view('soap');
         }
