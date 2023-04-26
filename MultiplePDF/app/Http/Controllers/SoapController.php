@@ -67,15 +67,14 @@ class SoapController extends Controller
                 'confirm_password' => $request->input('confirm_password')
             ]);
             $result = json_decode(json_encode($result), true);
-            
-            dd($result);
-            /*
-            if (isset($result['token']) && $result['token'] !== "Invalid username or password") {
-                $request->session()->put('token', $result['token']);
-                return redirect()->route('Descargasregistro');
+
+            if ($result['response'] == "Success") {
+                
+                return redirect()->route('SignIn');
             } else {
-                return view('hola.SignIn')->with('error', 'Las credenciales proporcionadas no son válidas.');
-            }*/
+                
+                return view('hola.SignUP')->with('error', 'Las credenciales proporcionadas no son válidas.');
+            }
             
         } else {
             return view('hola.SignUP');
