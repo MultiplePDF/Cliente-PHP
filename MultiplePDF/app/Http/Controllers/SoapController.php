@@ -24,58 +24,7 @@ class SoapController extends Controller
         }
     }
 
-    public function test2Soap(Request $request)
-    {
-        
-        if ($request->isMethod('POST') && $request->filled('email', 'password')) {
-            dd($request->isMethod('POST'));
-            $url = 'http://java.bucaramanga.upb.edu.co/ws/multiplepdf.wsdl';
-            $client = new \SoapClient($url);
-            $result = $client->login([
-                'email' => $request->input('email'),
-                'password' => $request->input('password')
-            ]);
-            $result = json_decode(json_encode($result), true);
-            
-            if (isset($result['response']) && $result['response'] !== "Email o contraseña incorrectos") {
-                $request->session()->put('token', $result['token']);
-                return redirect()->route('Descargasregistro');
-            } else {
-                return view('hola.SignIn')->with('error', 'Las credenciales proporcionadas no son válidas.');
-            }
-            
-        } else {
-            
-            return view('hola.SignIn')->with('error', 'Error!.');;
-        }
-    }
-    public function test3Soap(Request $request)
-    {
-        if ($request->isMethod('post') && $request->filled('name','email', 'password','confirm_password')) {
-            $url = 'http://java.bucaramanga.upb.edu.co/ws/multiplepdf.wsdl';
-            $client = new \SoapClient($url);
-            $result = $client->register([
-                'name' => $request->input('name'),
-                'email' => $request->input('email'),
-                'password' => $request->input('password'),
-                'confirm_password' => $request->input('confirm_password')
-            ]);
-            $result = json_decode(json_encode($result), true);
-            
-            //dd($result);
-            /*
-            if (isset($result['token']) && $result['token'] !== "Invalid username or password") {
-                $request->session()->put('token', $result['token']);
-                return redirect()->route('Descargasregistro');
-            } else {
-                return view('hola.SignIn')->with('error', 'Las credenciales proporcionadas no son válidas.');
-            }*/
-            
-        } else {
-            return view('hola.SignUP');
-        }
-    }
-
+    //LOGIN WITH SOAP
     public function wipSoap(Request $request)
     {
         if ($request->isMethod('POST') && $request->filled('email', 'password')) {
@@ -102,4 +51,35 @@ class SoapController extends Controller
             return view('hola.SignIn')->with('error', 'Error!.');;
         }
     }
+
+
+    //REGISTER WITH SOAP
+    
+    public function test3Soap(Request $request)
+    {
+        if ($request->isMethod('post') && $request->filled('name','email', 'password','confirm_password')) {
+            $url = 'http://java.bucaramanga.upb.edu.co/ws/multiplepdf.wsdl';
+            $client = new \SoapClient($url);
+            $result = $client->register([
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'password' => $request->input('password'),
+                'confirm_password' => $request->input('confirm_password')
+            ]);
+            $result = json_decode(json_encode($result), true);
+            
+            dd($result);
+            /*
+            if (isset($result['token']) && $result['token'] !== "Invalid username or password") {
+                $request->session()->put('token', $result['token']);
+                return redirect()->route('Descargasregistro');
+            } else {
+                return view('hola.SignIn')->with('error', 'Las credenciales proporcionadas no son válidas.');
+            }*/
+            
+        } else {
+            return view('hola.SignUP');
+        }
+    }
+
 }

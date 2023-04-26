@@ -39,7 +39,11 @@ Route::middleware('web')->group(function () {
     //Sign Up
     Route::get('/SignUp', function () {
         return view('hola.SignUp');
-    })->name('SignUp');
+    })->name('SignUp')->uses('App\Http\Controllers\SoapController@test3Soap');
+    
+
+    Route::post('/SignUp', 'App\Http\Controllers\SoapController@test3Soap');    
+
 
     //Recovery
     Route::get('/Recuperar', function () {
