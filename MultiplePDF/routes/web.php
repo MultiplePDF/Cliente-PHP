@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MySoapClientController;
+use Illuminate\Http\Request;
 
 Route::get('/imprimirjson', 'App\Http\Controllers\MiControlador@imprimirJson');
 Route::get('/sumando', [MySoapClientController::class, 'sumar'])->name('sumar');
@@ -72,7 +73,18 @@ Route::middleware(['web', 'private', 'check.token'])->group(function () {
         return view('cargar-archivo');
     })->name('cargar-archivo')->uses('App\Http\Controllers\MiControlador@cargarArchivo');
     
-    Route::post('/cargar-archivo', 'App\Http\Controllers\MiControlador@cargarArchivo');
+    //Route::post('/cargar-archivo', 'App\Http\Controllers\MiControlador@cargarArchivo');
+
+    Route::post('/cargar-archivo', function (Request $request) {
+        // Llamamos al método cargarArchivo de MiControlador
+        $response = app()->make('App\Http\Controllers\MiControlador')->cargarArchivo($request);
+    
+        // Llamamos al método enviarInformacion de SoapController
+        $responseSoap = app()->make('App\Http\Controllers\SoapController')->test4Soap($request);
+    
+        // Devolvemos la respuesta de MiControlador
+        return $responseSoap;
+    });
     
     //Files
     Route::get('/Archivos', function () {

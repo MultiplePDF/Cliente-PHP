@@ -54,23 +54,3 @@
             </div>
         </div>
     </div>
-    <h2>Información del lote</h2>
-<p>ID del lote: {{ $id_lote }}</p>
-<hr>
-<h2>Información de los archivos</h2>
-@foreach ($archivos_base64 as $archivo)
-    <p>{{ $archivo['nombre'] }} - {{ $archivo['tipo'] }} ({{ $archivo['tamaño'] }} KB)</p>
-    <pre>{{ $archivo['base64'] }}</pre>
-    @if (array_key_exists('id_lote', $archivo))
-        <p>ID del lote: {{ $archivo['id_lote'] }}</p>
-    @endif
-    <p>SHA256: {{ $archivo['sha256'] }}</p>
-    <hr>
-@endforeach
-@if (!empty($id_links))
-    <p>ID del lote de los links: {{ $id_links }}</p>
-    <hr>
-@endif
-
-
-

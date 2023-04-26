@@ -27,12 +27,12 @@ class MiControlador extends Controller
 
                 // Agregamos el archivo a nuestro array de archivos en base64
                 array_push($archivos_base64, [
-                    'id_lote' => $id_lote, // Agregamos el ID único para todo el conjunto de archivos
-                    'nombre' => basename($link),
-                    'tipo' => 'pdf',
-                    'tamaño' => round(strlen($contenidoArchivo)/1024, 2), // Tamaño en KB
+                    'idFile' => $id_lote, // Agregamos el ID único para todo el conjunto de archivos
                     'base64' => $contenidoBase64,
-                    'sha256' => $contenidoSHA256 // Agregamos el SHA256 al array
+                    'fileName' => basename($link),
+                    'fileExtension' => 'URL' ,
+                    'size' => round(strlen($contenidoArchivo)/1024, 2), // Tamaño en KB
+                    'checksum' => $contenidoSHA256 // Agregamos el SHA256 al array
                 ]);
             }
         }
@@ -50,21 +50,24 @@ class MiControlador extends Controller
 
                 // Agregamos el archivo a nuestro array de archivos en base64
                 array_push($archivos_base64, [
-                    'id_lote' => $id_lote, // Agregamos el ID único para todo el conjunto de archivos
-                    'nombre' => $archivo->getClientOriginalName(),
-                    'tipo' => $extension,
-                    'tamaño' => round($archivo->getSize()/1024, 2), // Tamaño en KB
+                    'idFile' => $id_lote, // Agregamos el ID único para todo el conjunto de archivos
                     'base64' => $contenidoBase64,
-                    'sha256' => $contenidoSHA256 // Agregamos el SHA256 al array
+                    'fileName' => $archivo->getClientOriginalName(),
+                    'fileExtension' => $extension,
+                    'size' => round(strlen($contenidoArchivo)/1024, 2), // Tamaño en KB
+                    'checksum' => $contenidoSHA256 // Agregamos el SHA256 al array
                 ]);
             }
         }
 
         // Almacenamos el array y el ID del lote en variables de sesión
-        session(['archivos_base64' => $archivos_base64, 'id_lote' => $id_lote]);
+        $archivos_base64_json = json_encode($archivos_base64);
+        session(['archivos_base64' => $archivos_base64_json]);
 
         // Pasamos el array de archivos y el ID del lote a la vista
-        return view('cargar-archivo', compact('archivos_base64', 'id_lote'));
+        return view('cargar-archivo', compact('archivos_base64', 'archivos_base64_json'));
+
     }
+
 }
 

@@ -81,4 +81,33 @@ class SoapController extends Controller
         }
     }
 
+    //UPLOAD FILES WITH SOAP
+    
+    public function test4Soap(Request $request)
+    { 
+        //$request->session()->has('token') && $request->session()->has('archivos_base64')
+        if ($request->session()->has('archivos_base64')) {
+            $url = 'http://java.bucaramanga.upb.edu.co/ws/multiplepdf.wsdl';
+            $client = new SoapClient($url);
+            //$token = $request->session()->get('token');
+            $token="babab";
+            $documentos = $request->session()->get('archivos_base64');
+            $result = $client->sendBatch(array(
+                'token' => $token,
+                'listJSON' => $documentos
+            ));
+            $result = json_decode(json_encode($result), true);
+            if ($result['response'] == 'true') {
+                return redirect()->route('Archivos');
+            } else {
+                return view('cargar-archivo')->with('error', 'Ha ocurrido un error al enviar los documentos: ');
+            }
+            
+        } else {
+            return view('cargar-archivo')->with('error', 'No se ha iniciado sesión o no se han cargado archivos.');
+        }
+    }
+    
+
+    
 }
