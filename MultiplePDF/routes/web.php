@@ -68,9 +68,11 @@ Route::middleware(['web', 'private', 'check.token'])->group(function () {
     })->name('Perfil');
 
     //Upload Files
-    Route::get('/SubirArchivos', function () {
-        return view('hola.Subir');
-    })->name('SubirArchivos');
+    Route::get('/cargar-archivo', function () {
+        return view('cargar-archivo');
+    })->name('cargar-archivo')->uses('App\Http\Controllers\MiControlador@cargarArchivo');
+    
+    Route::post('/cargar-archivo', 'App\Http\Controllers\MiControlador@cargarArchivo');
     
     //Files
     Route::get('/Archivos', function () {

@@ -73,7 +73,7 @@
                         <br/>
                         de pdf
                     </p>
-                    <a class="btn btn-start rounded-pill shadow-lg" role="button" href="{{ route('SubirArchivos') }}">Iniciar</a>
+                    <a class="btn btn-start rounded-pill shadow-lg" role="button" href="{{ route('cargar-archivo') }}">Iniciar</a>
                 </div>
             </div>
 

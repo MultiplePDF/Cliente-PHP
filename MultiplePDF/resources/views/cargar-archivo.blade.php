@@ -31,7 +31,7 @@
                 <h2>Sube los archivos que quieres convertir</h2>
                 <p></p><img src="{{ asset('img/Tablet_login-pana.svg') }}">
                 <h2 style="font-size: 15px;padding-bottom: 5px;">Arrastra y sube los archivos aqui</h2>
-                <form action="{{ url('/cargar-archivo') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{route('cargar-archivo')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="archivo" class="form-label visually-hidden">Buscar Archivos</label>
@@ -41,22 +41,36 @@
                         <button type="submit" class="btn btn-primary">Convertir Archivos</button>
                     </div>
                 </form>
-                <h2 style="font-size: 15px;padding-top: 15px;padding-bottom: 0px;">O</h2>
-                <h2 style="font-size: 15px;padding-top: 10px;padding-bottom: 10px;">Ingresa los links a convertir</h2><input type="url" style="padding-right: 10px;">
-                <button class="btn btn-primary" type="button" style="background: #FF7764;--bs-body-bg: var(--bs-btn-disabled-color);padding-left: 10px;text-align: center;padding-right: 10px;padding-bottom: 0px;">></button>
+                <form action="{{ route('cargar-archivo') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+
+                    <div class="form-group">
+                        <label for="links">Ingresa los links a convertir (separados por coma)</label>
+                        <textarea class="form-control" id="links" name="links"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Convertir</button>
+                </form>
+                   
             </div>
         </div>
     </div>
-    
-    @if(isset($archivos))
-    <div>
-        <h3>Archivos seleccionados:</h3>
-        <ul>
-            @foreach($archivos as $archivo)
-                <li>{{ $archivo->getClientOriginalName() }} ({{ round($archivo->getSize() / 1024, 2) }} KB)</li>
-            @endforeach
-        </ul>
-    </div>
+    <h2>Información del lote</h2>
+<p>ID del lote: {{ $id_lote }}</p>
+<hr>
+<h2>Información de los archivos</h2>
+@foreach ($archivos_base64 as $archivo)
+    <p>{{ $archivo['nombre'] }} - {{ $archivo['tipo'] }} ({{ $archivo['tamaño'] }} KB)</p>
+    <pre>{{ $archivo['base64'] }}</pre>
+    @if (array_key_exists('id_lote', $archivo))
+        <p>ID del lote: {{ $archivo['id_lote'] }}</p>
+    @endif
+    <p>SHA256: {{ $archivo['sha256'] }}</p>
+    <hr>
+@endforeach
+@if (!empty($id_links))
+    <p>ID del lote de los links: {{ $id_links }}</p>
+    <hr>
 @endif
 
-    
+
+
