@@ -51,14 +51,14 @@
                         </div>
                         <div class="row d-flex justify-content-center">
                             <div class="col-md-6 col-xl-4" style="width: 450px;height: 500pxpx;">
-                                <form class="text-center d-flex flex-column justify-content-between" method="post">
+                                <form class="text-center d-flex flex-column justify-content-between" method="POST">
                                     
                                     
                                     
                                     <div class="mb-3">
                                         <label class="form-label" style="font-family: 'Montserrat', sans-serif;
                                         font-weight: 600; /* semibold */;margin-left: 0px;margin-right: 340px; width: 170px;">Nombre y apellido</label>
-                                        <input class="form-control rounded-pill shadow" type="name" name="name_lastname"  style="width: 391px;height: 42px;text-align: center;">
+                                        <input class="form-control rounded-pill shadow" type="name" name="name"  style="width: 391px;height: 42px;text-align: center;">
                                     </div>
                                         
                                     
@@ -75,7 +75,7 @@
                                     <div class="mb-3">
                                         <label class="form-label" style="font-family: 'Montserrat', sans-serif;
                                         font-weight: 600; /* semibold */;margin-left: 0px;margin-right: 340px; width: 170px;">Repetir Contraseña</label>
-                                        <input class="form-control rounded-pill shadow" type="password" name="conf_password" style="width: 391px;height: 42px;text-align: center;"></div>
+                                        <input class="form-control rounded-pill shadow" type="password" name="confirm_password" style="width: 391px;height: 42px;text-align: center;"></div>
                                     
                                     <br>
                                     <button class="btn btn-SignIn rounded-pill shadow-lg" type="submit" style="color: rgb(33, 37, 41);font-family: 'Montserrat', sans-serif;

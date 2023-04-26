@@ -5,63 +5,83 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MySoapClientController;
 
 Route::get('/imprimirjson', 'App\Http\Controllers\MiControlador@imprimirJson');
-//Route::get('/soap', 'MySoapClientController@callSoapService');
-
-// Ruta que llama al método llamarServicioSoap del controlador ServicioSoapController
-//Route::post('/llamar-servicio-soap', 'App\Http\Controllers\MySoapClientController@sumar');
-//Route::post('/sumar', 'App\Http\Controllers\MySoapClientController@sumar')->name('sumar');
-//Route::post('/sumar', [MySoapClientController::class, 'sumar'])->name('sumar');
-/*
-Route::get('/sumando', function () {
-    return view('soap');
-})->name('soap');
-*/
 Route::get('/sumando', [MySoapClientController::class, 'sumar'])->name('sumar');
 Route::post('/sumado', [MySoapClientController::class, 'sumar'])->name('sumar');
-Route::get('/', function () {
-    return view('hola.home');
-});
-
-Route::get('/home', function () {
-    return view('hola.home');
-})->name('home');
-
-
-Route::get('/SignIn', function () {
-    return view('hola.SignIn');
-})->name('SignIn');
-
-
-Route::get('/SignUp', function () {
-    return view('hola.SignUp');
-})->name('SignUp');
-
-Route::get('/Recuperar', function () {
-    return view('hola.Recuperar');
-})->name('Recuperar');
-
-Route::get('/Perfil', function () {
-    return view('hola.Perfil');
-})->name('Perfil');
-
-Route::get('/Descargasregistro', function () {
-    return view('hola.Descargasregistro');
-})->name('Descargasregistro');
-
-Route::get('/Archivos', function () {
-    return view('hola.Archivos');
-})->name('Archivos');
-
-Route::get('/Descargastotal', function () {
-    return view('hola.Descargastotal');
-})->name('Descargastotal');
-
-Route::get('/SubirArchivos', function () {
-    return view('hola.Subir');
-})->name('SubirArchivos');
-
-Route::get('/soap1', 'App\Http\Controllers\SoapController@testSoap')->name('soap');
-Route::post('/soap1', 'App\Http\Controllers\SoapController@testSoap');
 
 Route::get('/cargar-archivo', 'App\Http\Controllers\ArchivoController@mostrarFormularioCarga');
 Route::post('/cargar-archivo', 'App\Http\Controllers\ArchivoController@cargarArchivo');
+
+
+Route::middleware('web')->group(function () {
+    
+    // Rutas públicas:
+
+    //home
+    Route::get('/', function () {
+        return view('hola.home');
+    })->name('home');
+
+    //How works?
+    Route::get('/servicios', [HomeController::class, 'services'])->name('services');
+
+    //Contact
+    Route::get('/contacto', [HomeController::class, 'contact'])->name('contact');
+
+    //Sign In
+    Route::get('/SignIn', function () {
+        return view('hola.SignIn');
+    })->name('SignIn')->middleware('check.token')->uses('App\Http\Controllers\SoapController@test2Soap');
+    
+    Route::post('/SignIn', 'App\Http\Controllers\SoapController@test2Soap')->middleware('check.token');    
+
+    //Sign Up
+    Route::get('/SignUp', function () {
+        return view('hola.SignUp');
+    })->name('SignUp');
+
+    //Recovery
+    Route::get('/Recuperar', function () {
+        return view('hola.Recuperar');
+    })->name('Recuperar');
+    
+    // Rutas SOAP
+    Route::get('/soap1', 'App\Http\Controllers\SoapController@testSoap')->name('soap');
+    Route::post('/soap1', 'App\Http\Controllers\SoapController@testSoap');
+    
+});
+
+
+// Rutas que requieren autenticación
+Route::middleware(['web', 'private', 'check.token'])->group(function () {
+
+    // Rutas privadas:
+
+    //Profile
+    Route::get('/Perfil', function () {
+        return view('hola.Perfil');
+    })->name('Perfil');
+
+    //Upload Files
+    Route::get('/SubirArchivos', function () {
+        return view('hola.Subir');
+    })->name('SubirArchivos');
+    
+    //Files
+    Route::get('/Archivos', function () {
+        return view('hola.Archivos');
+    })->name('Archivos');
+
+    //Total downloads
+    Route::get('/Descargastotal', function () {
+        return view('hola.Descargastotal');
+    })->name('Descargastotal');
+
+    //Record downloads
+    Route::get('/Descargasregistro', function () {
+        return view('hola.Descargasregistro');
+    })->name('Descargasregistro');
+
+    //
+    //Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+});

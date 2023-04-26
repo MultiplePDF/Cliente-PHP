@@ -40,6 +40,7 @@
             </div>
         </div>
     </nav>
+    
     <div class="container">
         <div class="row">
             <div class="col-md-6">
@@ -54,18 +55,18 @@
                         
                         <div class="row d-flex justify-content-center">
                             <div class="col-md-6 col-xl-4" style="width: 450px;height: 500pxpx;">
-                                <form class="text-center d-flex flex-column justify-content-between" method="POST" action="{{ route('SubirArchivos') }}">
+                                <form class="text-center d-flex flex-column justify-content-between" method="POST" action="{{ route('SignIn') }}">
                                     @csrf
                                     <div class="mb-3">
                                         <label class="form-label" style="font-family: 'Montserrat', sans-serif;
                                         font-weight: 600; /* semibold */;margin-right: 340px;margin-left: 10px;width: 170px;text-align: left;">Correo electrónico</label>
-                                        <input class="form-control rounded-pill shadow" type="email" name="email" placeholder="" style="width: 391px;height: 50px;text-align: center;">
+                                        <input class="form-control rounded-pill shadow" type="email" name="email" placeholder="" style="width: 391px;height: 50px;text-align: center;" required>
                                     </div>
                                     
                                     <div class="mb-3">
                                         <label class="form-label" style="font-family: 'Montserrat', sans-serif;
                                         font-weight: 600; /* semibold */;margin-left: 10px;margin-right: 340px;">Contraseña</label>
-                                        <input class="form-control rounded-pill shadow" type="password" name="password"style="width: 391px;height: 50px;text-align: center;">
+                                        <input class="form-control rounded-pill shadow" type="password" name="password"style="width: 391px;height: 50px;text-align: center;" required>
                                     </div>
 
                                     <a class="nav-link btn-forgotPass" href="{{ route('Recuperar') }}" style="margin-right: 40px;" type="submit">
@@ -106,6 +107,9 @@
     
     <footer class="text-center py-4"></footer>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    @if(isset($result))
+        <p>El Resultado de la suma es: {{ $result }}</p>
+    @endif
 </body>
 
 </html>
