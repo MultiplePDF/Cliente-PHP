@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Exception;
 use \SoapClient;
 use Illuminate\Http\Request;
 
@@ -26,9 +26,9 @@ class SoapController extends Controller
 
     public function test2Soap(Request $request)
     {
-        // dd($request->isMethod('POST'));
         
         if ($request->isMethod('POST') && $request->filled('email', 'password')) {
+            dd($request->isMethod('POST'));
             $url = 'http://java.bucaramanga.upb.edu.co/ws/multiplepdf.wsdl';
             $client = new \SoapClient($url);
             $result = $client->login([
@@ -45,7 +45,7 @@ class SoapController extends Controller
             }
             
         } else {
-          
+            
             return view('hola.SignIn')->with('error', 'Error!.');;
         }
     }
@@ -73,6 +73,33 @@ class SoapController extends Controller
             
         } else {
             return view('hola.SignUP');
+        }
+    }
+
+    public function wipSoap(Request $request)
+    {
+        if ($request->isMethod('POST') && $request->filled('email', 'password')) {
+            
+            $url = 'http://java.bucaramanga.upb.edu.co/ws/multiplepdf.wsdl';
+            $client = new \SoapClient($url);
+            $result = $client->login([
+                'email' => $request->input('email'),
+                'password' => $request->input('password')
+            ]);
+            $result = json_decode(json_encode($result), true);
+            
+            if ($result['response'] == "Success") {
+                
+                $request->session()->put('token', $result['token']);
+                
+                return redirect()->route('Perfil');
+            } else {
+                
+                return view('hola.SignIn')->with('error', 'Las credenciales proporcionadas no son válidas.');
+            }
+            
+        } else {
+            return view('hola.SignIn')->with('error', 'Error!.');;
         }
     }
 }

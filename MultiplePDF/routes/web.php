@@ -30,9 +30,11 @@ Route::middleware('web')->group(function () {
     //Sign In
     Route::get('/SignIn', function () {
         return view('hola.SignIn');
-    })->name('SignIn')->middleware('check.token')->uses('App\Http\Controllers\SoapController@test2Soap');
+    })->name('SignIn')->middleware('check.token')->uses('App\Http\Controllers\SoapController@wipSoap');
     
-    Route::post('/SignIn', 'App\Http\Controllers\SoapController@test2Soap')->middleware('check.token');    
+    Route::post('/SignIn', 'App\Http\Controllers\SoapController@wipSoap');    
+
+    //Route::post('/SignIn', 'App\Http\Controllers\SoapController@wipSoap')->middleware('check.token');    
 
     //Sign Up
     Route::get('/SignUp', function () {
@@ -83,5 +85,7 @@ Route::middleware(['web', 'private', 'check.token'])->group(function () {
 
     //
     //Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('/logout', 'App\Http\Controllers\Auth\LoginController@logout')->name('logout');
+
 
 });

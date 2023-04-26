@@ -65,6 +65,10 @@
                         <div class="d-flex flex-column mb-2 btnProfile">
                             <a href="#" class="btn btn-primary btmProfileX d-flex flex-column justify-content-center align-items-center">Eliminar Cuenta</a>
                         </div>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button class="btn btn-primary btmProfileX d-flex flex-column justify-content-center align-items-center" type="submit">Cerrar Sesión</button>
+                        </form>
                     </div>
                 </div>
             </div>
