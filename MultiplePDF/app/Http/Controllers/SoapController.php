@@ -89,15 +89,17 @@ class SoapController extends Controller
         if ($request->session()->has('archivos_base64')) {
             $url = 'http://java.bucaramanga.upb.edu.co/ws/multiplepdf.wsdl';
             $client = new SoapClient($url);
-            //$token = $request->session()->get('token');
-            $token="babab";
+            $token = $request->session()->get('token');
+            
             $documentos = $request->session()->get('archivos_base64');
+            
             $result = $client->sendBatch(array(
                 'token' => $token,
                 'listJSON' => $documentos
             ));
+            
             $result = json_decode(json_encode($result), true);
-            if ($result['response'] == 'true') {
+            if ($result['successful'] == 'true') {
                 return redirect()->route('Archivos');
             } else {
                 return view('cargar-archivo')->with('error', 'Ha ocurrido un error al enviar los documentos: ');

@@ -30,7 +30,7 @@ class MiControlador extends Controller
                     'idFile' => $id_lote, // Agregamos el ID único para todo el conjunto de archivos
                     'base64' => $contenidoBase64,
                     'fileName' => basename($link),
-                    'fileExtension' => 'URL' ,
+                    'fileExtension' => 'url' ,
                     'size' => round(strlen($contenidoArchivo)/1024, 2), // Tamaño en KB
                     'checksum' => $contenidoSHA256 // Agregamos el SHA256 al array
                 ]);
