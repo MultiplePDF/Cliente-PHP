@@ -47,11 +47,11 @@
             <div class="col">
                 <div class="p-1 card card-box">
                     <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                        <div class="profile-image mb-4">
-                            <img src="~/images/imgprofile.jpg" alt="Imagen de perfil">
-                        </div>
-                        <span class="name mb-2" >Diego Arbeláez</span>
-                        <span class="email" >diego.arbelaez.2015@upb.edu.co</span>
+                        
+                        <span class="name mb-2" ><p>{{ $result->name }}</p></span>
+                        
+
+                        <span class="email" ><p>{{ $result->email }}</p></span>
 
                         <div class="d-flex flex-column mb-2 btnProfile mb-4">
                             <a href="#" class="btn btn-primary btmProfileX d-flex flex-column justify-content-center align-items-center">Cambiar Nombre</a>

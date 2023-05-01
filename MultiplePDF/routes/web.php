@@ -66,7 +66,7 @@ Route::middleware(['web', 'private', 'check.token'])->group(function () {
     //Profile
     Route::get('/Perfil', function () {
         return view('hola.Perfil');
-    })->name('Perfil');
+    })->name('Perfil')->uses('App\Http\Controllers\SoapController@test6Soap');
 
     //Upload Files
     Route::get('/cargar-archivo', function () {

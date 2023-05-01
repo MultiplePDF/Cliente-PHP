@@ -109,6 +109,53 @@ class SoapController extends Controller
             return view('cargar-archivo')->with('error', 'No se ha iniciado sesión o no se han cargado archivos.');
         }
     }
+
+
+    //SHOW FILES UPLOADED WITH SOAP
+    public function test5Soap(Request $request)
+    {
+        if ($request->isMethod('post') && $request->filled('name','email', 'password','confirm_password')) {
+            $url = 'http://java.bucaramanga.upb.edu.co/ws/multiplepdf.wsdl';
+            $client = new \SoapClient($url);
+            $result = $client->register([
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'password' => $request->input('password'),
+                'confirm_password' => $request->input('confirm_password')
+            ]);
+            $result = json_decode(json_encode($result), true);
+
+            if ($result['response'] == "Success") {
+                
+                return redirect()->route('SignIn');
+            } else {
+                
+                return view('hola.SignUP')->with('error', 'Las credenciales proporcionadas no son válidas.');
+            }
+            
+        } else {
+            return view('hola.SignUP');
+        }
+    }
+
+    //PROFILE WITH SOAP
+    public function test6Soap(Request $request)
+    {
+    
+        $url = 'http://java.bucaramanga.upb.edu.co/ws/multiplepdf.wsdl';
+        $client = new SoapClient($url);
+        $token = $request->session()->get('token');
+        
+        $result = $client->getUserDetails([
+            'token' => $token
+        ]);
+        if($result->response =="Success") {
+            return view('hola.Perfil', ['result' => $result]);
+        } else {
+            return view('hola.Perfil')->with('error', 'Se presentan problemas en la información personal.');
+        }
+            
+    }
     
 
     
