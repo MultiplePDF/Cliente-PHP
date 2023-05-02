@@ -19,7 +19,7 @@ class CheckTokenMiddleware
                 return redirect()->route('SignIn')->with('error', 'Invalid username or password');
             }
         } else {
-            if ($request->route()->named('SignIn')) {
+            if (($request->route()->named('SignIn'))){
                 return $next($request);
             } else {
                 return redirect()->route('SignIn')->with('error', 'Please login to access this page');
