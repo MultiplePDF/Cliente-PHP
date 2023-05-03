@@ -57,6 +57,7 @@
                     <th style="text-align: center;">Fecha</th>
                     <th style="text-align: center;"># de Archivos</th>
                     <th style="text-align: center;">Vigencia</th>
+                    <th style="text-align: center;">Archivos</th>
                     <th style="text-align: center;">Link</th>
                 </tr>
             </thead>
@@ -67,6 +68,8 @@
                 <td>{{ $batch->createdAt }}</td>
                 <td>{{ $batch->numberFiles }}</td>
                 <td>{{ $batch->validity }}</td>
+                <td><a href="/Descargasregistro/{{ $batch->_id }}" class="btn btn-primary">Ver Archivos</a></td>
+
                 <td>
                     <a href="{{ $batch->batchPath }}" class="btn btn-primary" download>Descargar</a>
                 </td>

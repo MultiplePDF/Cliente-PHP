@@ -129,6 +129,7 @@ class SoapController extends Controller
         }
     }
 
+
     //PROFILE WITH SOAP
     public function test6Soap(Request $request)
     {
