@@ -114,27 +114,18 @@ class SoapController extends Controller
     //SHOW FILES UPLOADED WITH SOAP
     public function test5Soap(Request $request)
     {
-        if ($request->isMethod('post') && $request->filled('name','email', 'password','confirm_password')) {
-            $url = 'http://java.bucaramanga.upb.edu.co/ws/multiplepdf.wsdl';
-            $client = new \SoapClient($url);
-            $result = $client->register([
-                'name' => $request->input('name'),
-                'email' => $request->input('email'),
-                'password' => $request->input('password'),
-                'confirm_password' => $request->input('confirm_password')
-            ]);
-            $result = json_decode(json_encode($result), true);
-
-            if ($result['response'] == "Success") {
-                
-                return redirect()->route('SignIn');
-            } else {
-                
-                return view('hola.SignUP')->with('error', 'Las credenciales proporcionadas no son válidas.');
-            }
-            
+        $url = 'http://java.bucaramanga.upb.edu.co/ws/multiplepdf.wsdl';
+        $client = new SoapClient($url);
+        $token = $request->session()->get('token');
+        
+        $result = $client->getBatchDetails([
+            'token' => $token
+        ]);
+        //dd($result);
+        if($result->successful ==true) {
+            return view('hola.Archivos', ['result' => $result]);
         } else {
-            return view('hola.SignUP');
+            return view('hola.Archivos')->with('error', 'Se presentan problemas en la información personal.');
         }
     }
 

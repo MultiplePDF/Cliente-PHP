@@ -13,7 +13,10 @@ class CheckTokenMiddleware
         if ($request->session()->has('token')) {
             
             $token = $request->session()->get('token');
-            if (!empty($token)) {
+            if (!empty($token)&&$request->route()->named('SignIn')) {
+                return redirect()->route('home')->with('error', 'You are already signed in');
+            }
+            else if (!empty($token)) {
                 return $next($request);
             } else {
                 return redirect()->route('SignIn')->with('error', 'Invalid username or password');

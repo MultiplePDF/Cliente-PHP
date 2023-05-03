@@ -30,6 +30,7 @@ Route::middleware('web')->group(function () {
 
     //Sign In
     Route::get('/SignIn', function () {
+        
         return view('hola.SignIn');
     })->name('SignIn')->middleware('check.token')->uses('App\Http\Controllers\SoapController@wipSoap');
     
@@ -39,6 +40,7 @@ Route::middleware('web')->group(function () {
 
     //Sign Up
     Route::get('/SignUp', function () {
+        
         return view('hola.SignUp');
     })->name('SignUp')->uses('App\Http\Controllers\SoapController@test3Soap');
     
@@ -89,7 +91,7 @@ Route::middleware(['web', 'private', 'check.token'])->group(function () {
     //Files
     Route::get('/Archivos', function () {
         return view('hola.Archivos');
-    })->name('Archivos');
+    })->name('Archivos')->uses('App\Http\Controllers\SoapController@test5Soap');
 
     //Total downloads
     Route::get('/Descargastotal', function () {

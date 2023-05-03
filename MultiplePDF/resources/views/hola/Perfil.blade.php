@@ -12,34 +12,40 @@
 </head>
 <body>
 
-<nav class="navbar navbar-light navbar-expand-md py-3">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center" style="color: rgba(18, 17, 17);font-family: Montserrat, sans-serif;font-weight: 800;font-size: 24px;" href="{{ route('home') }}">
-                <span>MultiplePDF</span>
-            </a>
-            <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-2">
-                <span class="visually-hidden">Toggle navigation</span>
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div id="navcol-2" class="collapse navbar-collapse">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{{ route('home') }}" style="width: 165.92px;color: rgba(111, 103, 103);text-align: center;font-family: 'Montserrat', sans-serif;
-                        font-weight: 500;
-                        font-size: 18px; ">Inicio</a>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('Archivos') }}"  style="width: 165.92px;color: rgba(111, 103, 103);text-align: center;font-family: 'Montserrat', sans-serif;
-                        font-weight: 500;
-                        font-size: 18px; ">Mis archivos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('Perfil') }}"  style="width: 165.92px;color: rgba(111, 103, 103);text-align: center;font-family: 'Montserrat', sans-serif;
-                        font-weight: 500;
-                        font-size: 18px; ">Perfil</a>
-                    </li>
-                </ul>
+    <nav class="navbar navbar-light navbar-expand-md py-3">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" style="color: rgba(18, 17, 17);font-family: Montserrat, sans-serif;font-weight: 800;font-size: 24px;" href="{{ route('home') }}">
+                    <span>MultiplePDF</span>
+                </a>
+                <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-2">
+                    <span class="visually-hidden">Toggle navigation</span>
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div id="navcol-2" class="collapse navbar-collapse">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{{ route('home') }}" style="width: 200.92px;color: rgba(111, 103, 103);text-align: center;font-family: 'Montserrat', sans-serif;
+                            font-weight: 500;
+                            font-size: 18px; ">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('cargar-archivo') }}"  style="width: 200.92px;color: rgba(111, 103, 103);text-align: center;font-family: 'Montserrat', sans-serif;
+                            font-weight: 500;
+                            font-size: 18px; ">Convertir archivos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('Archivos') }}"  style="width: 200.92px;color: rgba(111, 103, 103);text-align: center;font-family: 'Montserrat', sans-serif;
+                            font-weight: 500;
+                            font-size: 18px; ">Mis archivos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('Perfil') }}"  style="width: 170.92px;color: rgba(111, 103, 103);text-align: center;font-family: 'Montserrat', sans-serif;
+                            font-weight: 500;
+                            font-size: 18px; ">Perfil</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
     </nav>
 
     <div class="container text-center container-card">
