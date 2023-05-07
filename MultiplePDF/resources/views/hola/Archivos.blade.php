@@ -69,7 +69,7 @@
                     <td>{{ date('d/m/Y H:i:s', strtotime($batch->createdAt)) }}</td>
                     <td>{{ $batch->numberFiles }}</td>
                     <td>{{ date('d/m/Y H:i:s', strtotime($batch->validity))  }}</td>
-                    <td><a href="{{ route('Descargasregistro',$batch->_id) }}" class="btn btn-primary">Ver Archivos</a></td>
+                    <td><a href="{{ route('Descargasregistro',['id'=>$batch->_id]) }}" class="btn btn-primary">Ver Archivos</a></td>
 
                     <td>
                         <a href="{{ $batch->batchPath }}" class="btn btn-primary" download>Descargar</a>

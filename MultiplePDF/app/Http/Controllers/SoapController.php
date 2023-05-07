@@ -140,16 +140,15 @@ class SoapController extends Controller
         $result = $client->getBatchDetails([
             'token' => $token
         ]);
-
+        
         //dd($result);
         $result2=$result->batchesList;
         $result3 = json_decode($result2); // convertir la cadena JSON en un array u objeto
+        
         foreach ($result3 as $item) {
             if ($item->_id === $id) {
+                //dd("hola");
                 return view('hola.Descargasregistro', ['result' => $item]);
-            }
-            else {
-                return view('hola.Archivos')->with('error', 'Aun no se tiene registro de archivos convertidos.');
             }
             
         }
