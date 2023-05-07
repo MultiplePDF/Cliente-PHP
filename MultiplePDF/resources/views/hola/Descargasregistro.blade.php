@@ -64,7 +64,15 @@
                     @foreach (($result->files) as $file)
                     <tr style="text-align: center;">
                         <td>{{ $file->fileName }}</td>
-                        <td>{{ $file->size . ' kb' }}</td>
+                        <td>
+                        @if ($file->size < 1024)
+                            {{ $file->size }} B
+                        @elseif ($file->size < 1048576)
+                            {{ round($file->size / 1024, 1) }} KB
+                        @else
+                            {{ round($file->size / 1048576, 2) }} MB
+                        @endif
+                        </td>
                         <td>
                             <a href="{{ $file->filePath }}" class="btn btn-primary" download>Descargar</a>
                         </td>

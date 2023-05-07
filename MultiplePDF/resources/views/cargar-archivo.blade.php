@@ -54,27 +54,48 @@
             <div class="col-md-8 col-xl-6 text-center mx-auto">
                 <h2>Sube los archivos que quieres convertir</h2>
                 <p></p><img src="{{ asset('img/Tablet_login-pana.svg') }}">
-                <h2 style="font-size: 15px;padding-bottom: 5px;">Arrastra y sube los archivos aqui</h2>
-                <form action="{{route('cargar-archivo')}}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="archivo" class="form-label visually-hidden">Buscar Archivos</label>
-                        <input type="file" name="archivo[]" id="archivo" class="form-control" multiple>
-                    </div>
-                    <div class="d-grid gap-2 col-6 mx-auto">
-                        <button type="submit" class="btn btn-primary">Convertir Archivos</button>
-                    </div>
-                </form>
-                <form action="{{ route('cargar-archivo') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
+                <div  class="col-md-8 col-xl-6 text-center mx-auto">
+                    <h2 style="font-size: 15px;padding-bottom: 5px;">Arrastra y sube los archivos aqui, Solo se admiten archivos de Office con las siguientes extensiones: .doc, .docx, .xls, .xlsx, .ppt, .pptx.</h2>
+                    <form action="{{route('cargar-archivo')}}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="archivo" class="form-label visually-hidden">Buscar Archivos</label>
+                            <input type="file" name="archivo[]" id="archivo" class="form-control" multiple>
+                        </div>
+                        <div class="d-grid gap-2 col-6 mx-auto">
+                            
+                            <button type="submit" class="btn btn-primary" id="convertir-btn" disabled>Convertir Archivos</button>
 
-                    <div class="form-group">
-                        <label for="links">Ingresa los links a convertir (separados por coma)</label>
-                        <textarea class="form-control" id="links" name="links"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Convertir</button>
-                </form>
-                   
+                        </div>
+                    </form>
+                </div>
+                <p></p>
+                <div>
+                    <form action="{{ route('cargar-archivo') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+
+                        <div class="form-group">
+                            <label for="links">Ingresa los links a convertir (separados por coma)</label>
+                            
+                            <textarea style="margin-bottom: 20px;" class="form-control" id="links" name="links"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Convertir</button>
+                    </form>
+                </div>   
             </div>
         </div>
     </div>
+
+
+    <script>
+    const inputFile = document.querySelector('#archivo');
+    const convertirBtn = document.querySelector('#convertir-btn');
+
+    inputFile.addEventListener('change', () => {
+        if (inputFile.files.length > 0) {
+            convertirBtn.removeAttribute('disabled');
+        } else {
+            convertirBtn.setAttribute('disabled', 'disabled');
+        }
+    });
+</script>
