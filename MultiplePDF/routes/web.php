@@ -5,13 +5,6 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MySoapClientController;
 use Illuminate\Http\Request;
 
-Route::get('/imprimirjson', 'App\Http\Controllers\MiControlador@imprimirJson');
-Route::get('/sumando', [MySoapClientController::class, 'sumar'])->name('sumar');
-Route::post('/sumado', [MySoapClientController::class, 'sumar'])->name('sumar');
-
-Route::get('/cargar-archivo', 'App\Http\Controllers\ArchivoController@mostrarFormularioCarga');
-Route::post('/cargar-archivo', 'App\Http\Controllers\ArchivoController@cargarArchivo');
-
 
 Route::middleware('web')->group(function () {
     

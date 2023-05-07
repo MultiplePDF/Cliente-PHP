@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Untitled</title>
+    <title>Convertidor</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/Navbar-Right-Links-icons.css') }}">
@@ -52,36 +52,37 @@
     <div class="container py-4 py-xl-5">
         <div class="row mb-5">
             <div class="col-md-8 col-xl-6 text-center mx-auto">
+
                 <h2>Sube los archivos que quieres convertir</h2>
-                <p></p><img src="{{ asset('img/Tablet_login-pana.svg') }}">
-                <div  class="col-md-8 col-xl-6 text-center mx-auto">
-                    <h2 style="font-size: 15px;padding-bottom: 5px;">Arrastra y sube los archivos aqui, Solo se admiten archivos de Office con las siguientes extensiones: .doc, .docx, .xls, .xlsx, .ppt, .pptx.</h2>
-                    <form action="{{route('cargar-archivo')}}" method="POST" enctype="multipart/form-data">
+                <p></p>
+                <div class="row justify-content-around" style="flex-wrap: wrap;">
+                    <div class="col-12 col-md-6 text-center mb-4" style="box-shadow: 0px 3px 5px rgba(0,0,0,0.2); border-radius: 10px; height: 400px; display: flex; flex-direction: column; justify-content: center; align-items: center;width:400px; max-width: 600px; margin-bottom: 20px;">
+                        <img src="{{ asset('img/upload_files.svg') }}" style="max-width: 100%; height: auto; width: 200px;">
+                        <h2 style="font-size: 15px; padding-bottom: 5px;">Arrastra y sube los archivos aquí, solo se admiten archivos de Office con las siguientes extensiones: .doc, .docx, .xls, .xlsx, .ppt, .pptx.</h2>
+                        <form action="{{route('cargar-archivo')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                             <label for="archivo" class="form-label visually-hidden">Buscar Archivos</label>
                             <input type="file" name="archivo[]" id="archivo" class="form-control" multiple>
                         </div>
                         <div class="d-grid gap-2 col-6 mx-auto">
-                            
                             <button type="submit" class="btn btn-primary" id="convertir-btn" disabled>Convertir Archivos</button>
-
                         </div>
-                    </form>
-                </div>
-                <p></p>
-                <div>
-                    <form action="{{ route('cargar-archivo') }}" method="POST" enctype="multipart/form-data">
+                        </form>
+                    </div>
+                    <p></p>
+                    <div class="col-12 col-md-6 text-center mb-4" style="box-shadow: 0px 3px 5px rgba(0,0,0,0.2); border-radius: 10px; height: 400px; display: flex; flex-direction: column; justify-content: center; align-items: center;width:400px; max-width: 600px; margin-bottom: 20px;">
+                        <form action="{{ route('cargar-archivo') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-
-                        <div class="form-group">
+                        <div class="form-group" style="display: flex; flex-direction: column;">
                             <label for="links">Ingresa los links a convertir (separados por coma)</label>
-                            
                             <textarea style="margin-bottom: 20px;" class="form-control" id="links" name="links"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Convertir</button>
-                    </form>
-                </div>   
+                        </form>
+                    </div> 
+                </div>
+
             </div>
         </div>
     </div>
