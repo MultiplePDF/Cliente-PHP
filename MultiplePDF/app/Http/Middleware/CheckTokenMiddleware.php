@@ -14,7 +14,7 @@ class CheckTokenMiddleware
             
             $token = $request->session()->get('token');
             if (!empty($token)&&$request->route()->named('SignIn')) {
-                return redirect()->route('home')->with('error', 'You are already signed in');
+                return redirect()->route('cargar-archivo')->with('error', 'You are already signed in');
             }
             else if (!empty($token)) {
                 return $next($request);

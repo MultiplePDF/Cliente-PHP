@@ -41,7 +41,7 @@ class SoapController extends Controller
                 
                 $request->session()->put('token', $result['token']);
                 
-                return redirect()->route('Perfil');
+                return redirect()->route('cargar-archivo');
             } else {
                 
                 return view('hola.SignIn')->with('error', 'Las credenciales proporcionadas no son válidas.');
@@ -97,7 +97,7 @@ class SoapController extends Controller
                 'token' => $token,
                 'listJSON' => $documentos
             ));
-            
+            //dd($result);
             $result = json_decode(json_encode($result), true);
             if ($result['successful'] == 'true') {
                 return redirect()->route('Archivos');
@@ -122,10 +122,36 @@ class SoapController extends Controller
             'token' => $token
         ]);
         //dd($result);
+        
         if($result->successful ==true) {
             return view('hola.Archivos', ['result' => $result]);
         } else {
-            return view('hola.Archivos')->with('error', 'Se presentan problemas en la información personal.');
+            return view('hola.Archivos')->with('error', 'Aun no se tiene registro de archivos convertidos.');
+        }
+    }
+
+    //SHOW FILES UPLOADED WITH SOAP
+    public function test51Soap(Request $request, $id)
+    {
+        $url = 'http://java.bucaramanga.upb.edu.co/ws/multiplepdf.wsdl';
+        $client = new SoapClient($url);
+        $token = $request->session()->get('token');
+        
+        $result = $client->getBatchDetails([
+            'token' => $token
+        ]);
+
+        //dd($result);
+        $result2=$result->batchesList;
+        $result3 = json_decode($result2); // convertir la cadena JSON en un array u objeto
+        foreach ($result3 as $item) {
+            if ($item->_id === $id) {
+                return view('hola.Descargasregistro', ['result' => $item]);
+            }
+            else {
+                return view('hola.Archivos')->with('error', 'Aun no se tiene registro de archivos convertidos.');
+            }
+            
         }
     }
 

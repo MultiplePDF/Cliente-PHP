@@ -99,9 +99,9 @@ Route::middleware(['web', 'private', 'check.token'])->group(function () {
     })->name('Descargastotal');
 
     //Record downloads
-    Route::get('/Descargasregistro', function () {
+    Route::get('/Descargasregistro/{id}', function () {
         return view('hola.Descargasregistro');
-    })->name('Descargasregistro')->uses('App\Http\Controllers\SoapController@test5Soap');
+    })->name('Descargasregistro')->uses('App\Http\Controllers\SoapController@test51Soap');
 
     //
     //Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

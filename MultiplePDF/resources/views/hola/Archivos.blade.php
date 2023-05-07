@@ -50,33 +50,39 @@
             </div>
     </nav>
     <div class="table-responsive">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th style="text-align: center;">Transacción</th>
-                    <th style="text-align: center;">Fecha</th>
-                    <th style="text-align: center;"># de Archivos</th>
-                    <th style="text-align: center;">Vigencia</th>
-                    <th style="text-align: center;">Archivos</th>
-                    <th style="text-align: center;">Link</th>
-                </tr>
-            </thead>
-            <tbody>
-            @foreach (json_decode($result->batchesList) as $batch)
-            <tr style="text-align: center;">
-                <td>{{ $batch->_id }}</td>
-                <td>{{ $batch->createdAt }}</td>
-                <td>{{ $batch->numberFiles }}</td>
-                <td>{{ $batch->validity }}</td>
-                <td><a href="/Descargasregistro/{{ $batch->_id }}" class="btn btn-primary">Ver Archivos</a></td>
+        @if (is_array(json_decode($result->batchesList)))
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="text-align: center;">Transacción</th>
+                        <th style="text-align: center;">Fecha</th>
+                        <th style="text-align: center;"># de Archivos</th>
+                        <th style="text-align: center;">Vigencia</th>
+                        <th style="text-align: center;">Archivos</th>
+                        <th style="text-align: center;">Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (json_decode($result->batchesList) as $batch)
+                <tr style="text-align: center;">
+                    <td>{{ $batch->_id }}</td>
+                    <td>{{ date('d/m/Y H:i:s', strtotime($batch->createdAt)) }}</td>
+                    <td>{{ $batch->numberFiles }}</td>
+                    <td>{{ date('d/m/Y H:i:s', strtotime($batch->validity))  }}</td>
+                    <td><a href="{{ route('Descargasregistro',$batch->_id) }}" class="btn btn-primary">Ver Archivos</a></td>
 
-                <td>
-                    <a href="{{ $batch->batchPath }}" class="btn btn-primary" download>Descargar</a>
-                </td>
-            </tr>
-            @endforeach
-            </tbody>
-        </table>
+                    <td>
+                        <a href="{{ $batch->batchPath }}" class="btn btn-primary" download>Descargar</a>
+                    </td>
+                </tr>
+                @endforeach
+                </tbody>
+            </table>
+        @else
+            <p style="display: flex; justify-content: center;align-items: center; height: 100vh; font-size: 2em; text-align: center;">
+                No se encontraron lotes de archivos convertidos
+            </p>
+        @endif
     </div>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>

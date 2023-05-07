@@ -79,7 +79,7 @@
                 </div>
             </div>
             <div class="col w-50 m-4 d-flex flex-column justify-content-center align-items-center">
-                <img src="~/images/profile.svg"  width="80%" alt="Imagen">
+                <img src="{{ asset('img/img_profile.svg') }}"  width="80%" alt="Imagen">
             </div>
         </div>
     </div>

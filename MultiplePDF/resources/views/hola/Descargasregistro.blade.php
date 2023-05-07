@@ -51,26 +51,32 @@
             </div>
     </nav>
     <div class="table-responsive">
-        <table class="table table-hover text-center">
-            <thead class="header-border">
-                <tr>
-                    <th class="align-middle txtHead">Nombre</th>
-                    <th class="align-middle txtHead">Tamaño</th>
-                    <th class="align-middle txtHead">Link</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (json_decode($result->batchesList) as $batch)
-                <tr style="text-align: center;">
-                    <td>{{ $batchedList->fileName }}</td>
-                    <td>{{ $batchedList->size }}</td>
-                    <td>
-                        <a href="{{ $batchedList->path }}" class="btn btn-primary" download>Descargar</a>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+        @if (is_array($result->files))
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center;">Nombre</th>
+                            <th style="text-align: center;">Tamaño</th>
+                            <th style="text-align: center;">Link</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (($result->files) as $file)
+                    <tr style="text-align: center;">
+                        <td>{{ $file->fileName }}</td>
+                        <td>{{ $file->size . ' kb' }}</td>
+                        <td>
+                            <a href="{{ $file->filePath }}" class="btn btn-primary" download>Descargar</a>
+                        </td>
+                    </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+        @else
+            <p style="display: flex; justify-content: center;align-items: center; height: 100vh; font-size: 2em; text-align: center;">
+                No se encontraron los archivos convertidos
+            </p>
+        @endif
     </div>
 
 </body>
