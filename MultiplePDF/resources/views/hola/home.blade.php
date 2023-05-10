@@ -31,15 +31,6 @@
             <div id="navcol-2" class="collapse navbar-collapse">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="" style="width: 165.92px;color: rgba(111, 103, 103);text-align: center;font-family: 'Montserrat', sans-serif;
-                        font-weight: 500;
-                        font-size: 18px; ">Como funciona?</a>
-                    <li class="nav-item">
-                        <a class="nav-link" href="" style="width: 165.92px;color: rgba(111, 103, 103);text-align: center;font-family: 'Montserrat', sans-serif;
-                        font-weight: 500;
-                        font-size: 18px; ">Contacto</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('SignIn') }}" style="width: 165.92px;color: rgba(111, 103, 103);text-align: center;font-family: 'Montserrat', sans-serif;
                         font-weight: 500;
                         font-size: 18px; ">Iniciar Sesión</a>

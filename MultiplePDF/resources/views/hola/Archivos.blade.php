@@ -11,12 +11,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:medium,semibold&display=swap" rel="stylesheet">
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 </head>
 
 <body>
     <nav class="navbar navbar-light navbar-expand-md py-3">
             <div class="container">
-                <a class="navbar-brand d-flex align-items-center" style="color: rgba(18, 17, 17);font-family: Montserrat, sans-serif;font-weight: 800;font-size: 24px;" href="{{ route('home') }}">
+                <a class="navbar-brand d-flex align-items-center" style="color: rgba(18, 17, 17);font-family: Montserrat, sans-serif;font-weight: 800;font-size: 24px;">
                     <span>MultiplePDF</span>
                 </a>
                 <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-2">
@@ -25,11 +26,6 @@
                 </button>
                 <div id="navcol-2" class="collapse navbar-collapse">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="{{ route('home') }}" style="width: 200.92px;color: rgba(111, 103, 103);text-align: center;font-family: 'Montserrat', sans-serif;
-                            font-weight: 500;
-                            font-size: 18px; ">Inicio</a>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('cargar-archivo') }}"  style="width: 200.92px;color: rgba(111, 103, 103);text-align: center;font-family: 'Montserrat', sans-serif;
                             font-weight: 500;
@@ -41,9 +37,14 @@
                             font-size: 18px; ">Mis archivos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('Perfil') }}"  style="width: 170.92px;color: rgba(111, 103, 103);text-align: center;font-family: 'Montserrat', sans-serif;
+                            <a class="nav-link" style="width: 170.92px;color: rgba(111, 103, 103);text-align: center;font-family: 'Montserrat', sans-serif;
                             font-weight: 500;
-                            font-size: 18px; ">Perfil</a>
+                            font-size: 18px; ">
+                                <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                    <button style="margin-left: auto;margin-right: 0;" class="btn btn-primary btmProfileX d-flex flex-column justify-content-center align-items-center" type="submit">Cerrar Sesión</button>
+                                </form>    
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -63,9 +64,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach (json_decode($result->batchesList) as $batch)
+                @php
+                    $counter = count(json_decode($result->batchesList));
+                @endphp
+                @foreach (array_reverse(json_decode($result->batchesList)) as $batch)
                 <tr style="text-align: center;">
-                    <td>{{ $batch->_id }}</td>
+                    <td>{{ $counter }}</td>
                     <td>{{ date('d/m/Y H:i:s', strtotime($batch->createdAt)) }}</td>
                     <td>{{ $batch->numberFiles }}</td>
                     <td>{{ date('d/m/Y H:i:s', strtotime($batch->validity))  }}</td>
@@ -75,6 +79,9 @@
                         <a href="{{ $batch->batchPath }}" class="btn btn-primary" download>Descargar</a>
                     </td>
                 </tr>
+                @php
+                    $counter--;
+                @endphp
                 @endforeach
                 </tbody>
             </table>
@@ -84,7 +91,7 @@
             </p>
         @endif
     </div>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    
 </body>
 
 </html>
