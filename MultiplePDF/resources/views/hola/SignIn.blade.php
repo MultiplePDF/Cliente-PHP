@@ -75,6 +75,9 @@
                                     <br>
                                     <br>
 
+                                    @if (isset($error))
+                                        <div class="alert alert-danger">{{ $error }}</div>
+                                    @endif
                                     
                                     
                                     <button class="btn btn-SignIn rounded-pill shadow-lg" style="font-family: 'Montserrat', sans-serif;
@@ -86,7 +89,7 @@
                                         <label style="color: rgb(33, 37, 41);font-family: 'Montserrat', sans-serif;
                                         font-weight: 500; /* semibold */">¿No tienes una cuenta?</label>
                                         <br>
-                                        <a class="nav-link" href="{{ route('Perfil') }}" style="color: rgb(33, 37, 41);font-family: 'Montserrat', sans-serif;
+                                        <a class="nav-link" href="{{ route('SignUp') }}" style="color: rgb(33, 37, 41);font-family: 'Montserrat', sans-serif;
                                         font-weight: 500; /* semibold */">Registrate</a>
                                         <br>
                                         <br>
@@ -107,9 +110,7 @@
     
     <footer class="text-center py-4"></footer>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    @if(isset($result))
-        <p>El Resultado de la suma es: {{ $result }}</p>
-    @endif
+    
 </body>
 
 </html>

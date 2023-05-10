@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Untitled</title>
+    <title>Recuperar Contraseña</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/Navbar-Right-Links-icons.css') }}">
@@ -23,15 +23,6 @@
 
             <div id="navcol-2" class="collapse navbar-collapse">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="" style="width: 165.92px;color: rgba(111, 103, 103);text-align: center;font-family: 'Montserrat', sans-serif;
-                        font-weight: 500;
-                        font-size: 18px; ">Como funciona?</a>
-                    <li class="nav-item">
-                        <a class="nav-link" href="" style="width: 165.92px;color: rgba(111, 103, 103);text-align: center;font-family: 'Montserrat', sans-serif;
-                        font-weight: 500;
-                        font-size: 18px; ">Contacto</a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('SignIn') }}"  style="width: 165.92px;color: rgba(111, 103, 103);text-align: center;font-family: 'Montserrat', sans-serif;
                         font-weight: 500;
@@ -58,20 +49,15 @@
                                 <p class="text-muted"></p>
                             </div>
                         </div>
-                        <form class="d-flex justify-content-center flex-wrap" method="post" style="height: 200px;">
+                        <form class="d-flex justify-content-center flex-wrap" method="POST" style="height: 200px;">
+                            @csrf
                             <div class="mb-3">
                                 <input class="form-control" type="email" name="email" placeholder="Correo electrónico" style="margin-left: 20px;border:1px solid #ced4da !important;">
                                 <label class="form-label" style="padding: 20px;text-align: left;font-family: 'Montserrat', sans-serif;
                                 font-weight: 500;">
-                                    le llegara a su correo una URL junto a un 
+                                    le llegara a su correo una URL para 
                                     <br>
-                                    token como parámetro el cual le dará acceso
-                                    <br>
-                                    a cambiar su contraseña (este token debería
-                                    <br>
-                                    expirar una vez sea usado o 24 horas después 
-                                    <br>
-                                    de su creación si es que no fue usado).
+                                    cambiar su contraseña
                                     <br>
                                 </label>
                             </div>
@@ -79,6 +65,9 @@
                                 <button class="btn ms-2" type="submit" style="background: #FF7764;color: #FBF3F3;font-family: 'Montserrat', sans-serif;
                                 font-weight: 500;">Enviar</button></div>
                         </form>
+                        @if (isset($error))
+                            <div class="alert alert-danger">{{ $error }}</div>
+                        @endif
                     </div>
                 </section><label class="form-label"></label>
             </div>
@@ -86,6 +75,9 @@
         </div>
     </div>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+   
+
+
 </body>
 
 </html>

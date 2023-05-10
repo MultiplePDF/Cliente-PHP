@@ -45,6 +45,8 @@ Route::middleware('web')->group(function () {
     Route::get('/Recuperar', function () {
         return view('hola.Recuperar');
     })->name('Recuperar');
+
+    Route::post('/Recuperar', 'App\Http\Controllers\SoapController@test7Soap');    
     
     // Rutas SOAP
     Route::get('/soap1', 'App\Http\Controllers\SoapController@testSoap')->name('soap');

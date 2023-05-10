@@ -78,6 +78,10 @@
                                         <input class="form-control rounded-pill shadow" type="password" name="confirm_password" style="width: 391px;height: 42px;text-align: center;"></div>
                                     
                                     <br>
+
+                                    @if (isset($error))
+                                        <div class="alert alert-danger">{{ $error }}</div>
+                                    @endif
                                     <button class="btn btn-SignIn rounded-pill shadow-lg" type="submit" style="color: rgb(33, 37, 41);font-family: 'Montserrat', sans-serif;
                                     font-weight: 500; /* semibold */">Registrarse</button>
                                     

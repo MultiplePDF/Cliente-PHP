@@ -44,11 +44,13 @@ class SoapController extends Controller
                 return redirect()->route('cargar-archivo');
             } else {
                 
-                return view('hola.SignIn')->with('error', 'Las credenciales proporcionadas no son válidas.');
+                //$error="El email o contraseña no es valido.";
+                //return view('hola.SignIn', ['error' => $error]);
+                return view('hola.SignIn')->with('error', 'No se encuentra ese correo registrado.');
             }
             
         } else {
-            return view('hola.SignIn')->with('error', 'Error!.');;
+            return view('hola.SignIn');
         }
     }
 
@@ -73,7 +75,8 @@ class SoapController extends Controller
                 return redirect()->route('SignIn');
             } else {
                 
-                return view('hola.SignUP')->with('error', 'Las credenciales proporcionadas no son válidas.');
+                $error="Las credenciales proporcionadas no son válidas.";
+                return view('hola.SignUP', ['error' => $error]);
             }
             
         } else {
@@ -170,6 +173,31 @@ class SoapController extends Controller
             return view('hola.Perfil', ['result' => $result]);
         } else {
             return view('hola.Perfil')->with('error', 'Se presentan problemas en la información personal.');
+        }
+            
+    }
+
+    //FORGOT THE PASSWORD WITH SOAP
+    public function test7Soap(Request $request)
+    {
+    
+        if ($request->isMethod('post') && $request->filled('email')) {
+            $url = 'http://java.bucaramanga.upb.edu.co/ws/multiplepdf.wsdl';
+            $client = new \SoapClient($url);
+            $result = $client->forgot([
+                'email' => $request->input('email')
+            ]);
+            $result = json_decode(json_encode($result), true);
+            //dd($result);
+            if($result['successful']==true) {
+                return redirect()->route('SignIn');
+            } else {
+                $error="No se encuentra ese correo registrado";
+                return view('hola.Recuperar', ['error' => $error]);
+            }
+            
+        } else {
+            return view('hola.Recuperar');
         }
             
     }
